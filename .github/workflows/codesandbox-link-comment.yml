@@ -1,6 +1,6 @@
 name: Add codesandbox link
 
-on: 
+on:
   pull_request:
     types: [opened]
   # https://github.com/mshick/add-pr-comment/issues/25
