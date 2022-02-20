@@ -1,4 +1,4 @@
-type FIXME = { state: Extract<Order["state"], "initial" | "inWork"> } | null;
+type FIXME = Extract<Order, { state: "initial" | "inWork" }> | null;
 
 type Order =
   | {
