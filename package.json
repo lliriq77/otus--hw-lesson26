@@ -4,7 +4,7 @@
   "description": "> ##### Домашнее задание курса **[JavaScript Developer. Basic](https://otus.ru/lessons/javascript-basic/?int_source=courses_catalog&int_term=programming)** > > ![PR Sanity Check](https://github.com/lliriq77/otus--game-of-life/actions/workflows/sanity-check.yml/badge.svg)",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
+    "test": "TZ=UTC+3 jest",
     "lint": "eslint . --ext .js,.ts & prettier --check . && tsc --noEmit",
     "lint:fix": "eslint . --fix --ext .js,.ts & prettier --write .",
     "prepare": "husky install"
