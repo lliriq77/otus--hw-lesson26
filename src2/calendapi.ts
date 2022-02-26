@@ -22,18 +22,18 @@ export class Service implements StorageServ {
         localStorage.setItem('store', JSON.stringify(store));
     }
 
-    async read() {
+    read = async () => {
 
         const store: string | null = localStorage.getItem('store');
         if (store) return JSON.parse(store);
-        else return [];
+        return [];
     }
 
     async update(item: Storage) {
 
         const store = await this.read();
 
-        for (let i = 0; i < store.length; i++) {
+        for (let i = 0; i < store.length; i += 1) {
 
             if (item.id === store[i].id) store[i] = item;
         }
@@ -45,7 +45,7 @@ export class Service implements StorageServ {
 
         const store = await this.read();
 
-        for (let i = 0; i < store.length; i++) {
+        for (let i = 0; i < store.length; i += 1) {
 
             if (item.id === store[i].id) store.splice(i, 1);
         }
@@ -71,6 +71,7 @@ export class Service implements StorageServ {
         return store.filter(item => item.status === stat);
 
     }
+
     async filterTag(tag: string) {
 
         const store: Storage[] = await this.read();
