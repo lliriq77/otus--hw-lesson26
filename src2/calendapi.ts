@@ -5,10 +5,10 @@ export interface StorageServ {
   read: () => Promise<Storage[] | []>;
   update: (x: Storage) => Promise<void>;
   delete: (x: Storage) => Promise<void>;
-  filterDate: (x: number) => Promise<Storage[]>;
-  filterDescript: (x: string) => Promise<Storage[]>;
-  filterStatus: (x: string) => Promise<Storage[]>;
-  filterTag: (x: string) => Promise<Storage[]>;
+  filterDate: (x: number) => Promise<Storage[] | undefined>;
+  filterDescript: (x: string) => Promise<Storage[] | undefined>;
+  filterStatus: (x: string) => Promise<Storage[] | undefined>;
+  filterTag: (x: string) => Promise<Storage[] | undefined>;
 }
 
 export class Service implements StorageServ {
