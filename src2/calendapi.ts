@@ -2,12 +2,19 @@ import { Storage } from "./calendobj";
 
 export interface StorageServ {
   create: (x: Storage) => Promise<void>;
+
   read: () => Promise<Storage[] | []>;
+
   update: (x: Storage) => Promise<void>;
+
   delete: (x: Storage) => Promise<void>;
+
   filterDate: (x: number) => Promise<Storage[] | undefined>;
+
   filterDescript: (x: string) => Promise<Storage[] | undefined>;
+
   filterStatus: (x: string) => Promise<Storage[] | undefined>;
+
   filterTag: (x: string) => Promise<Storage[] | undefined>;
 }
 
@@ -20,7 +27,9 @@ export class Service implements StorageServ {
 
   read = async () => {
     const store: string | null = localStorage.getItem("store");
+
     if (store) return JSON.parse(store);
+
     return [];
   };
 
@@ -46,21 +55,25 @@ export class Service implements StorageServ {
 
   async filterDate(someDate: number) {
     const store: Storage[] = await this.read();
+
     return store.filter((item) => item.date === someDate);
   }
 
   async filterDescript(dscrpt: string) {
     const store: Storage[] = await this.read();
+
     return store.filter((item) => item.description.includes(dscrpt));
   }
 
   async filterStatus(stat: string) {
     const store: Storage[] = await this.read();
+
     return store.filter((item) => item.status === stat);
   }
 
   async filterTag(tag: string) {
     const store: Storage[] = await this.read();
+
     return store.filter((item) => item.tag === tag);
   }
 }
