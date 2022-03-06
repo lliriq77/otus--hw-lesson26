@@ -1,3 +1,5 @@
+import { JsonDB } from "node-json-db";
+import { Config } from "node-json-db/dist/lib/JsonDBConfig";
 import { Service } from "./calendapi";
 import { DbService } from "./jsondbapi";
 
@@ -164,7 +166,10 @@ describe("Service", () => {
 });
 
 describe("DbService", () => {
-  const servDb = new DbService();
+  const servDb = new DbService(
+    new JsonDB(new Config("myDataBase", true, false, "/")),
+    "/arr"
+  );
 
   beforeAll(async () => {
     await servDb.create({

@@ -1,18 +1,24 @@
 import { JsonDB } from "node-json-db";
-import { Config } from "node-json-db/dist/lib/JsonDBConfig";
 import { Storage } from "./calendobj";
 import { StorageServ } from "./calendapi";
 
 export class DbService implements StorageServ {
-  db = new JsonDB(new Config("myDataBase", true, false, "/"));
+  db: JsonDB;
+
+  dataPath: string;
+
+  constructor(db: JsonDB, dataPath: string) {
+    this.db = db;
+    this.dataPath = dataPath;
+  }
 
   async create(item: Storage) {
-    this.db.push("/arr[]", item, true);
+    this.db.push(`${this.dataPath}[]`, item, true);
   }
 
   read = async () => {
     try {
-      const store: Storage[] = this.db.getData("/arr");
+      const store: Storage[] = this.db.getData(this.dataPath);
 
       return store;
     } catch (error) {
@@ -28,7 +34,7 @@ export class DbService implements StorageServ {
       if (item.id === store[i].id) store[i] = item;
     }
 
-    this.db.push("/arr", store);
+    this.db.push(this.dataPath, store);
   }
 
   async delete(item: Storage) {
@@ -38,7 +44,7 @@ export class DbService implements StorageServ {
       if (item.id === store[i].id) store.splice(i, 1);
     }
 
-    this.db.push("/arr", store);
+    this.db.push(this.dataPath, store);
   }
 
   async filterDate(someDate: number) {
